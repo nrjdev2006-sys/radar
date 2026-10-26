@@ -1,0 +1,13 @@
+vivado/radar_vivado/
+vivado/*.xsa
+vitis_ws/
+*.jou
+*.log
+*.str
+.Xil/
+data/*.bin
+data/*.npy
+__pycache__/
+*.pyc
+.idea/
+.vscode/

@@ -1,0 +1,52 @@
+Vitis 2024.2 — how these sources plug into the lwIP Echo Server template
+========================================================================
+
+1. Export hardware from Vivado (include bitstream) to:
+     zynq-radar-sp/vivado/radar_system_wrapper.xsa
+
+2. Vitis Unified IDE:
+     File > New Component > Platform   (from the XSA)
+     File > New Component > Application
+       Template: lwIP Echo Server
+       Domain:  standalone_ps7_cortexa9_0
+       Add library: lwip220 (or lwip213) if the template does not already
+
+3. Delete (or stop compiling) the template echo.c.
+
+4. Add every file in vitis/src/*.c and vitis/include/*.h to the application.
+   Put vitis/include on the compiler include path (-I).
+
+5. Keep the template files:
+     platform.c  platform.h  platform_config.h
+     i2c_access.c  (if present)
+     sfp.c         (if present)
+
+6. lwipopts.h — the template is fine. Optional tweaks:
+     #define LWIP_UDP                    1
+     #define MEM_SIZE                    (32*1024)
+     #define PBUF_POOL_SIZE              256
+     #define PBUF_POOL_BUFSIZE           1700
+     #define LWIP_DHCP                   0
+
+7. If xparameters.h uses a different DMA device id, set DMA_DEV_ID
+   in radar_config.h.
+
+8. If the radar_core base address is not 0x43C00000, either:
+     - #define RADAR_CORE_BASEADDR <actual> in radar_config.h
+     - or add  #include "xparameters.h"  and map the generated symbol.
+
+9. Linker: default lscript.ld is OK. Heap should be >= 64 KB for lwIP.
+
+10. Program FPGA (from Vitis or Vivado Hardware Manager), then Run the
+    application. UART 115200 8N1 on the Zybo USB-UART COM port.
+
+11. UART printing uses integer milles (no %f) so newlib-nano does not need
+    -u _printf_float. If you switch to snprintf %f, add that linker flag.
+
+XSCT sketch (optional, Vitis Classic / xsct):
+  setws ./vitis_ws
+  platform create -name radar_pfm -hw ../vivado/radar_system_wrapper.xsa
+  platform generate
+  app create -name radar_ps -platform radar_pfm -domain standalone_ps7_cortexa9_0 \
+             -template {lwIP Echo Server}
+  # then replace sources as above
