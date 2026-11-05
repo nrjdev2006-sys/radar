@@ -1,0 +1,12 @@
+.Xil/
+.cache/
+.hw/
+.ip_user_files/
+.runs/
+.sim/
+*.jou
+*.log
+/query_props.tcl
+/export_*.tcl
+/implement_provisional.tcl
+/allow_unconstrained_preview.tcl

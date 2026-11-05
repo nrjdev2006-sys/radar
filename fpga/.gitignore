@@ -1,0 +1,6 @@
+sim/build/*
+!sim/build/.gitkeep
+build/
+*.jou
+*.log
+xsim.dir/

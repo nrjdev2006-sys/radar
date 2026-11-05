@@ -1,0 +1,40 @@
+.Xil/
+__pycache__/
+*.py[cod]
+*~
+*.jou
+*.log
+*.backup.jou
+*.backup.log
+build/
+xsim.dir/
+/radar_workspace*/
+/diagnose_xsa*.py
+/vitis_journal.py*
+
+# Vivado generated implementation, simulation, cache, and handoff temp data.
+fpga/vivado/radar_vivado_project/.cache/
+fpga/vivado/radar_vivado_project/.gen/
+fpga/vivado/radar_vivado_project/.runs/
+fpga/vivado/radar_vivado_project/.sim/
+fpga/vivado/radar_vivado_project/.hw/
+fpga/vivado/radar_vivado_project/.ip_user_files/
+fpga/vivado/radar_vivado_project/*.cache/
+fpga/vivado/radar_vivado_project/*.gen/
+fpga/vivado/radar_vivado_project/*.runs/
+fpga/vivado/radar_vivado_project/*.sim/
+fpga/vivado/radar_vivado_project/*.hw/
+fpga/vivado/radar_vivado_project/*.ip_user_files/
+fpga/vivado/radar_vivado_project/**/.Xil/
+fpga/vivado/radar_vivado_project/*.dcp
+fpga/vivado/radar_vivado_project/*.jou
+fpga/vivado/radar_vivado_project/*.log
+
+# Vitis generated workspace/build output.
+fpga/vitis/radar_workspace*/
+fpga/vitis/**/*.elf
+fpga/vitis/**/*.o
+fpga/vitis/**/*.a
+
+# Python generated files.
+*.pyc
