@@ -1,10 +1,36 @@
 param(
-    [string]$Part = 'xc7z010clg400-1'
+    [string]$Part = 'xc7z010clg400-1',
+    [string]$VivadoBin = "",
+    [string]$VivadoHome = ""
 )
 
 $ErrorActionPreference = 'Stop'
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$vivado = 'D:\Vivado\2024.2\bin\vivado.bat'
+
+if (-not $VivadoBin -and $VivadoHome) {
+    $VivadoBin = Join-Path $VivadoHome 'bin'
+}
+
+if (-not $VivadoBin) {
+    $candidates = @(
+        $(if ($env:XILINX_VIVADO) { Join-Path $env:XILINX_VIVADO 'bin' }),
+        'C:\Xilinx\Vivado\2024.2\bin',
+        'D:\Vivado\2024.2\bin',
+        'C:\Xilinx\Vivado\2014.4\bin'
+    )
+    foreach ($cand in $candidates) {
+        if ($cand -and (Test-Path -LiteralPath (Join-Path $cand 'vivado.bat'))) {
+            $VivadoBin = $cand
+            break
+        }
+    }
+}
+
+if (-not $VivadoBin -or -not (Test-Path -LiteralPath $VivadoBin)) {
+    throw "Vivado not found. Pass -VivadoBin or -VivadoHome."
+}
+
+$vivado = Join-Path $VivadoBin 'vivado.bat'
 $tcl = Join-Path $PSScriptRoot 'build_project.tcl'
 $projectDir = Join-Path $PSScriptRoot 'radar_vivado_project'
 
@@ -17,9 +43,7 @@ function Get-ShortPath([string]$Path) {
     return $shortPath
 }
 
-if (-not (Test-Path -LiteralPath $vivado)) {
-    throw "Vivado 2024.2 not found: $vivado"
-}
+Write-Host "Using Vivado: $vivado"
 New-Item -ItemType Directory -Force -Path $projectDir | Out-Null
 $projectDirShort = Get-ShortPath $projectDir
 $projectRootShort = Get-ShortPath $projectRoot

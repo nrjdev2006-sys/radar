@@ -1,10 +1,40 @@
+param(
+    [string]$VivadoBin = "",
+    [string]$VivadoHome = ""
+)
+
 $ErrorActionPreference = 'Stop'
 
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$vivadoBin = 'C:\Xilinx\Vivado\2014.4\bin'
-$xvlog = Join-Path $vivadoBin 'xvlog.bat'
-$xelab = Join-Path $vivadoBin 'xelab.bat'
-$xsim = Join-Path $vivadoBin 'xsim.bat'
+
+if (-not $VivadoBin -and $VivadoHome) {
+    $VivadoBin = Join-Path $VivadoHome 'bin'
+}
+
+if (-not $VivadoBin) {
+    $candidates = @(
+        $(if ($env:XILINX_VIVADO) { Join-Path $env:XILINX_VIVADO 'bin' }),
+        'C:\Xilinx\Vivado\2024.2\bin',
+        'D:\Vivado\2024.2\bin',
+        'C:\Xilinx\Vivado\2014.4\bin'
+    )
+    foreach ($cand in $candidates) {
+        if ($cand -and (Test-Path -LiteralPath (Join-Path $cand 'xvlog.bat'))) {
+            $VivadoBin = $cand
+            break
+        }
+    }
+}
+
+if (-not $VivadoBin -or -not (Test-Path -LiteralPath $VivadoBin)) {
+    throw "Vivado simulator tools not found. Pass -VivadoBin or -VivadoHome with the Vivado install directory."
+}
+
+Write-Host "Using Vivado bin: $VivadoBin"
+
+$xvlog = Join-Path $VivadoBin 'xvlog.bat'
+$xelab = Join-Path $VivadoBin 'xelab.bat'
+$xsim = Join-Path $VivadoBin 'xsim.bat'
 $buildDir = Join-Path $env:TEMP 'radar_xsim_build'
 
 foreach ($tool in @($xvlog, $xelab, $xsim)) {
@@ -16,7 +46,7 @@ foreach ($tool in @($xvlog, $xelab, $xsim)) {
 New-Item -ItemType Directory -Force -Path $buildDir | Out-Null
 Push-Location $buildDir
 try {
-    & $xvlog (Join-Path $projectRoot 'fpga\rtl\radar_pulse_timing.v') (Join-Path $projectRoot 'fpga\rtl\radar_axi_pulse.v') (Join-Path $projectRoot 'fpga\sim\tb_radar_pulse_timing.sv') (Join-Path $projectRoot 'fpga\sim\tb_radar_axi_pulse.sv')
+    & $xvlog (Join-Path $projectRoot 'fpga\rtl\radar_pulse_timing.v') (Join-Path $projectRoot 'fpga\rtl\radar_axi_pulse.v') -sv (Join-Path $projectRoot 'fpga\sim\tb_radar_pulse_timing.sv') (Join-Path $projectRoot 'fpga\sim\tb_radar_axi_pulse.sv')
     if ($LASTEXITCODE -ne 0) { throw "xvlog failed with exit code $LASTEXITCODE" }
 
     $tests = @(
