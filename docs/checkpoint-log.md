@@ -170,3 +170,36 @@
   **Platform creation retry:** called the documented Python API with the Cortex-A9 standalone domain specified, once with `no_boot_bsp=True` and once with the default boot-BSP behavior. Both runs stop after SDT generation with `Cannot create platform, status = StatusCode.UNKNOWN, details = ''`. The resulting platform metadata has no domains; `platform.build()` and lwIP configuration are consequently unreachable. Full logs are saved as `C:\fpga_radar\platform_domain_retry.log` and `C:\fpga_radar\platform_domain_retry2.log`.
   
   **Tool availability:** Vitis does include `lwip220_v1_0` and `lwip220_v1_1` sources, but the required `arm-none-eabi-gcc` binary remains absent. The platform failure is still before compilation, so installing that compiler alone would not explain or fix this particular error. The likely next action is to repair/modify the Vitis installation to include the full Zynq-7000 platform/standalone components and GNU ARM toolchain, then rerun the same script with the corrected XSCT PATH. No board programming, PS firmware, ping, or UDP test has occurred.
+## Checkpoint 14 — Z7-10 PS application running over JTAG
+
+**Build fix:** rebuilt the project for the actual `xc7z010clg400-1` board, generated the fixed XSA/bitstream, and corrected the Vitis launcher environment and empty-application template. Vitis 2024.2 built the standalone platform and PS application successfully.
+
+**Hardware test:** programmed the bitstream over Digilent JTAG, initialized PS7, downloaded and ran `radar_ps_app.elf`, and captured UART at 115200 baud. The app configured the AXI pulse peripheral for 100 ms high / 100 ms low and verified eight pulse starts. The TX gate is connected to user LED 0.
+
+**Captured output:**
+```
+Initializing...
+init:done
+Zybo Z7-10 Rev. B Demo Image
+
+Radar PS pulse test starting
+AXI base: 0x40000000
+Starting 8 visible LED pulses (100 ms high / 100 ms low)
+PASS: observed 8 pulse starts; TX gate is on LED 0
+```
+
+**Limit:** Ethernet/UDP firmware is not part of this PS app and no Ethernet packet test has run. The live demonstration uses JTAG for programming and USB UART for output; board bitstream/app are volatile across power-off.
+
+## Checkpoint 15 — PS Ethernet IQ packet bring-up app
+
+**Implemented:** enabled `lwip220` in the Vitis standalone domain and added a GEM0/lwIP UDP listener to the PS app. The board uses static IP `192.168.1.10`, UDP port `5005`, and keeps the PL test pulse visible on LED 0. The app validates the version 1 `RDR1` header, payload length, and CRC. `HELLO` returns readiness; `STATUS` returns PL busy/TX/pulse count; `IQ_SAMPLES` validates int16 I/Q pairs and returns the count and peak component.
+
+**Host test utility:** `python -m radar_host.hardware_test --host 192.168.1.10` sends HELLO and a generated 256-sample complex tone IQ packet, then checks the board's response. For a direct PC cable, configure the wired PC adapter to `192.168.1.20/24`.
+
+**Build verification:** Vitis 2024.2 successfully generated the lwIP platform and linked `radar_ps_app.elf`; output size reports 126,162 bytes text, 3,452 data, and 3,168,688 BSS. The host test utility starts and the existing host suite passes 23 tests.
+
+**Not yet verified:** this PC currently exposes Wi-Fi only, no wired Ethernet adapter, and JTAG hardware server was not listening during this build, so the new ELF has not been run or packet-tested on the board. Tomorrow, load the current matching bitstream and new ELF over JTAG, confirm the UART `UDP ready: 192.168.1.10:5005` banner, configure the wired PC IPv4 address, then run the Python test utility.
+
+**Scope limit:** the response proves that synthetic IQ bytes reach the Zynq PS and are parsed there. It reports only sample count/peak component; it does not pass IQ through the PL, capture an ADC, detect echoes, or calculate target range. Those are later data-path/DSP phases.
+
+\n

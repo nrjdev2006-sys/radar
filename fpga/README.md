@@ -92,7 +92,7 @@ The PS application entry point is `fpga/vitis/app_src/main.c`; the shared driver
 powershell -NoProfile -ExecutionPolicy Bypass -File .\fpga\vitis\build_vitis.ps1
 ```
 
-**Vitis status:** Vivado project, routed design, bitstream, and XSA complete successfully. Vitis Unified 2024.2 stops during SDT generation (`Error in generating SDT for given XSA`); no platform or application build is claimed. XSCT reads the XSA but cannot complete because the installed Unified package lacks the classic IDE service and registered `zynq_fsbl` template.
+**Vitis and board status:** the routed design, bitstream, XSA, standalone Vitis platform, and PS applications build successfully. The previous pulse-only application was loaded over JTAG and verified eight pulse starts on LED 0. A new lwIP UDP app now builds with GEM0 enabled, static IP `192.168.1.10`, and port `5005`; it validates framed IQ packets and replies with sample count/peak amplitude. The new Ethernet app still needs its first physical packet test. It does not perform range estimation or receive ADC data.
 
 **Bitstream status:** the board-preset build generates a routed bitstream. `tx_gate` drives the user LED for visible pulse timing; this is not an RF radar output.
 

@@ -2,7 +2,7 @@
 
 Project plan for a PC-controlled radar prototype using an Ethernet-connected FPGA. The first implementation target is a pulsed, monostatic radar: the FPGA controls the transmit timing, captures the receive signal, estimates pulse parameters, and reports target range to the PC.
 
-> **Hardware status:** target board is the Digilent Zybo Z7-10 (`xc7z010clg400-1`). The Vivado 2024.2 project applies the board preset, enables PS GEM0 over RGMII, and routes the PL pulse output to user LED 0. Synthesis, implementation, and bitstream generation pass. The bitstream has not yet been programmed to the board, and PS Ethernet/UDP firmware is not built; see `docs/checkpoint-log.md` for current Vitis status.
+> **Hardware status:** target board is the Digilent Zybo Z7-10 (`xc7z010clg400-1`). The pulse-only PS app ran over JTAG and verified eight LED 0 pulses. A second PS app now builds with lwIP UDP on `192.168.1.10:5005` and can validate a synthetic IQ packet, but its physical Ethernet round trip still needs testing. No ADC capture or FPGA range processing exists yet; see `docs/checkpoint-log.md`.
 
 ## Goal
 
@@ -43,7 +43,7 @@ The factor of two accounts for the signal travelling to the target and back. Pul
 
 ## Current software scaffold
 
-The project includes a hardware-independent signal reference model, UDP framing/client module, a PL pulse timing peripheral, and a provisional Zynq PS7+PL Vivado design. The PS driver and Vitis application source are present; Vitis 2024.2 currently rejects the XSA during platform import, so the Vitis platform/application build is not yet validated. See [FPGA project status](fpga/README.md) for exact open paths and checks.
+The project includes a hardware-independent signal reference model, UDP framing/client module, a PL pulse timing peripheral, and a Zynq PS7+PL Vivado design. The PS driver and Vitis application build successfully against the checked-in XSA; the application has been run on the connected Z7-10 over JTAG. The Ethernet/UDP path is still pending. See [FPGA project status](fpga/README.md) for exact open paths and checks.
 
 Open the Vivado project:
 

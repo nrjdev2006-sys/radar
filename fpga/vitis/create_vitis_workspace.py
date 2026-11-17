@@ -1,5 +1,6 @@
 import os
 import ctypes
+import shutil
 import vitis
 
 
@@ -13,12 +14,22 @@ def short_path(path):
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 fpga_dir = os.path.dirname(script_dir)
-workspace_dir = os.path.join(script_dir, "radar_workspace_vitis")
-os.makedirs(workspace_dir, exist_ok=True)
-workspace = short_path(workspace_dir)
-xsa = short_path(os.path.join(fpga_dir, "vivado", "radar_vivado_project", "radar_hardware.xsa"))
+workspace_dir = os.environ.get(
+    "RADAR_VITIS_WORKSPACE",
+    os.path.join(script_dir, "radar_workspace_vitis"),
+)
+workspace = os.path.abspath(workspace_dir)
+xsa_path = os.environ.get(
+    "RADAR_XSA",
+    os.path.join(fpga_dir, "vivado", "radar_vivado_project", "radar_hardware.xsa"),
+)
+xsa = short_path(xsa_path)
 app_source_dir = short_path(os.path.join(script_dir, "app_src"))
 driver_source_dir = short_path(os.path.join(fpga_dir, "ps"))
+platform_source_dir = os.path.join(
+    os.environ.get("RADAR_VITIS_HOME", os.environ.get("XILINX_VITIS", "")),
+    "data", "embeddedsw", "lib", "sw_apps", "lwip_udp_perf_server", "src",
+)
 
 if not os.path.isfile(xsa):
     raise FileNotFoundError(f"Vivado XSA is missing: {xsa}")
@@ -32,7 +43,10 @@ platform = client.create_platform_component(
     cpu="ps7_cortexa9_0",
     os="standalone",
     domain_name="standalone_a9_0",
+    generate_dtb=False,
 )
+domain = platform.get_domain(name="standalone_a9_0")
+domain.set_lib(lib_name="lwip220")
 platform.build()
 
 platform_xpfm = os.path.join(
@@ -55,7 +69,7 @@ app = client.create_app_component(
     name="radar_ps_app",
     platform=platform_xpfm,
     domain="standalone_a9_0",
-    template="empty",
+    template="empty_application",
 )
 app.import_files(
     from_loc=app_source_dir,
@@ -67,10 +81,28 @@ app.import_files(
     files=["radar_driver.c", "radar_driver.h"],
     dest_dir_in_cmp="src",
 )
+if not os.path.isfile(os.path.join(platform_source_dir, "platform.c")):
+    raise FileNotFoundError("Vitis lwIP platform support source was not found: " + platform_source_dir)
+staged_platform_source = os.path.join(workspace, "radar_lwip_platform.c")
+shutil.copy2(os.path.join(platform_source_dir, "platform.c"), staged_platform_source)
+shutil.copy2(os.path.join(platform_source_dir, "platform.h"), os.path.join(workspace, "platform.h"))
+app.import_files(
+    from_loc=short_path(workspace),
+    files=["radar_lwip_platform.c", "platform.h"],
+    dest_dir_in_cmp="src",
+)
+app.import_files(
+    from_loc=app_source_dir,
+    files=["platform_config.h"],
+    dest_dir_in_cmp="src",
+)
 app.build()
+app_elf = os.path.join(workspace, "radar_ps_app", "build", "radar_ps_app.elf")
+if not os.path.isfile(app_elf):
+    raise RuntimeError("Vitis did not produce the PS application ELF: " + app_elf)
 
 print(f"VITIS_PLATFORM_PASS {platform_xpfm}")
-print(f"VITIS_APP_PASS {os.path.join(workspace, 'radar_ps_app')}")
+print(f"VITIS_APP_PASS {app_elf}")
 vitis.dispose()
 
 

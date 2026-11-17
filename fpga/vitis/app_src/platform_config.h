@@ -1,0 +1,5 @@
+#ifndef RADAR_PLATFORM_CONFIG_H
+#define RADAR_PLATFORM_CONFIG_H
+#include "xparameters.h"
+#define PLATFORM_EMAC_BASEADDR XPAR_XEMACPS_0_BASEADDR
+#endif
