@@ -229,7 +229,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>ea41000f</spirit:value>
+            <spirit:value>ad68192c</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -245,7 +245,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>65633fab</spirit:value>
+            <spirit:value>72800e9e</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -580,6 +580,45 @@
           </spirit:wireTypeDefs>
         </spirit:wire>
       </spirit:port>
+      <spirit:port>
+        <spirit:name>rx_packet_led</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>result_led</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>reply_queued_led</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
     </spirit:ports>
     <spirit:modelParameters>
       <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="integer">
@@ -605,7 +644,7 @@
       <spirit:file>
         <spirit:name>src/radar_axi_pulse.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_02206b99</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_7b3f29a8</spirit:userFileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
@@ -671,14 +710,14 @@
       <xilinx:displayName>Radar AXI Pulse</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:coreRevision>1</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2026-11-05T04:52:55Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2026-11-17T09:10:18Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2024.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="a8a7baa0"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="2844e263"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="e7ccba56"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="3c0acf72"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="8d774c35"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="7974bb16"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="25ce3dea"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="0986e20d"/>
     </xilinx:packagingInfo>

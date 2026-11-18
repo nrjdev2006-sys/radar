@@ -55,3 +55,27 @@ radar_result_t radar_read_status(radar_device_t *device, radar_status_t *status)
     status->pulse_count = *reg_at(device, RADAR_REG_PULSE_COUNT);
     return RADAR_OK;
 }
+
+radar_result_t radar_signal_result(radar_device_t *device)
+{
+    if (device == 0 || device->registers == 0)
+        return RADAR_INVALID_ARGUMENT;
+    *reg_at(device, RADAR_REG_RESULT_EVENT) = 1u;
+    return RADAR_OK;
+}
+
+radar_result_t radar_signal_rx_packet(radar_device_t *device)
+{
+    if (device == 0 || device->registers == 0)
+        return RADAR_INVALID_ARGUMENT;
+    *reg_at(device, RADAR_REG_RX_EVENT) = 1u;
+    return RADAR_OK;
+}
+
+radar_result_t radar_signal_reply_queued(radar_device_t *device)
+{
+    if (device == 0 || device->registers == 0)
+        return RADAR_INVALID_ARGUMENT;
+    *reg_at(device, RADAR_REG_REPLY_EVENT) = 1u;
+    return RADAR_OK;
+}

@@ -2,7 +2,7 @@
 
 Project plan for a PC-controlled radar prototype using an Ethernet-connected FPGA. The first implementation target is a pulsed, monostatic radar: the FPGA controls the transmit timing, captures the receive signal, estimates pulse parameters, and reports target range to the PC.
 
-> **Hardware status:** target board is the Digilent Zybo Z7-10 (`xc7z010clg400-1`). The pulse-only PS app ran over JTAG and verified eight LED 0 pulses. A second PS app now builds with lwIP UDP on `192.168.1.10:5005` and can validate a synthetic IQ packet, but its physical Ethernet round trip still needs testing. No ADC capture or FPGA range processing exists yet; see `docs/checkpoint-log.md`.
+> **Hardware status:** target board is the Digilent Zybo Z7-10 (`xc7z010clg400-1`). The PS app is running over JTAG; HELLO and IQ UDP requests now pass over the direct Ethernet cable. The firmware calculates delay/range from a TX-aligned IQ window and the hardware-test sender injects a synthetic delayed echo. This verifies the packet-to-calculation-to-response path, not an RF target: no ADC/RF capture is connected to the current PL design. See `fpga/vitis/README.md` and `docs/checkpoint-log.md`.
 
 ## Goal
 
@@ -69,7 +69,7 @@ Run the software checks:
 python -m unittest discover -s tests -v
 ```
 
-The sample output is simulated IQ. It does not transmit RF or claim a real target range.
+The offline `python -m radar_host --demo` output uses simulated IQ. The hardware Ethernet test (`python -m radar_host.hardware_test`) also injects a synthetic delayed echo to verify board-side threshold/range calculation and UDP return; it does not transmit RF or claim a measured real-target range.
 
 The FPGA timing core and its simulation are documented in [fpga/README.md](fpga/README.md). Run its current Vivado simulation with:
 

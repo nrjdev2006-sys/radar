@@ -9,6 +9,9 @@
 #define RADAR_REG_PRI_TICKS     0x08u
 #define RADAR_REG_STATUS        0x0Cu
 #define RADAR_REG_PULSE_COUNT   0x10u
+#define RADAR_REG_RESULT_EVENT  0x14u
+#define RADAR_REG_RX_EVENT      0x18u
+#define RADAR_REG_REPLY_EVENT   0x1Cu
 
 #define RADAR_CONTROL_START     (1u << 0)
 #define RADAR_CONTROL_STOP      (1u << 1)
@@ -39,5 +42,8 @@ radar_result_t radar_configure(radar_device_t *device, uint32_t pw_ticks, uint32
 radar_result_t radar_start(radar_device_t *device);
 radar_result_t radar_stop(radar_device_t *device);
 radar_result_t radar_read_status(radar_device_t *device, radar_status_t *status);
+radar_result_t radar_signal_result(radar_device_t *device);
+radar_result_t radar_signal_rx_packet(radar_device_t *device);
+radar_result_t radar_signal_reply_queued(radar_device_t *device);
 
 #endif

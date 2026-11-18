@@ -45,7 +45,10 @@ module radar_axi_pulse #(
     output reg         s_axi_rvalid,
     (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI RREADY" *)
     input  wire        s_axi_rready,
-    output wire        tx_gate
+    output wire        tx_gate,
+    output wire        rx_packet_led,
+    output wire        result_led,
+    output wire        reply_queued_led
 );
 
     localparam [5:0] REG_CONTROL    = 6'h00;
@@ -53,6 +56,9 @@ module radar_axi_pulse #(
     localparam [5:0] REG_PRI_TICKS  = 6'h08;
     localparam [5:0] REG_STATUS     = 6'h0C;
     localparam [5:0] REG_PULSE_COUNT = 6'h10;
+    localparam [5:0] REG_RESULT_EVENT = 6'h14;
+    localparam [5:0] REG_RX_EVENT = 6'h18;
+    localparam [5:0] REG_REPLY_EVENT = 6'h1C;
 
     reg [5:0] awaddr_hold;
     reg [31:0] wdata_hold;
@@ -77,7 +83,19 @@ module radar_axi_pulse #(
     wire core_busy;
     wire core_config_error;
     wire core_pulse_start;
+    wire write_commit = have_aw && have_w && !s_axi_bvalid;
+    wire result_event = write_commit && write_addr == REG_RESULT_EVENT && write_strb[0] && write_data[0];
+    wire rx_event = write_commit && write_addr == REG_RX_EVENT && write_strb[0] && write_data[0];
+    wire reply_event = write_commit && write_addr == REG_REPLY_EVENT && write_strb[0] && write_data[0];
     integer byte_index;
+
+    // At the 100 MHz AXI clock, each LED phase lasts 100 ms for 4 fps status.
+    radar_event_led #(.PULSE_COUNT(1)) rx_packet_indicator (
+        .clk(s_axi_aclk), .rst_n(s_axi_aresetn), .event_pulse(rx_event), .led(rx_packet_led));
+    radar_event_led #(.PULSE_COUNT(1)) result_indicator (
+        .clk(s_axi_aclk), .rst_n(s_axi_aresetn), .event_pulse(result_event), .led(result_led));
+    radar_event_led #(.PULSE_COUNT(1)) reply_indicator (
+        .clk(s_axi_aclk), .rst_n(s_axi_aresetn), .event_pulse(reply_event), .led(reply_queued_led));
 
     assign s_axi_awready = !aw_hold_valid && !s_axi_bvalid;
     assign s_axi_wready  = !w_hold_valid && !s_axi_bvalid;
@@ -143,7 +161,10 @@ module radar_axi_pulse #(
                 if ((write_addr[1:0] != 2'b00) ||
                     !((write_addr == REG_CONTROL) ||
                       (write_addr == REG_PW_TICKS) ||
-                      (write_addr == REG_PRI_TICKS))) begin
+                      (write_addr == REG_PRI_TICKS) ||
+                      (write_addr == REG_RESULT_EVENT) ||
+                      (write_addr == REG_RX_EVENT) ||
+                      (write_addr == REG_REPLY_EVENT))) begin
                     bresp_error <= 1'b1; // SLVERR: unsupported or unaligned address
                 end else begin
                     bresp_error <= 1'b0;
@@ -163,6 +184,12 @@ module radar_axi_pulse #(
                             for (byte_index = 0; byte_index < 4; byte_index = byte_index + 1)
                                 if (write_strb[byte_index])
                                     pri_ticks_reg[byte_index*8 +: 8] <= write_data[byte_index*8 +: 8];
+                        end
+                        REG_RESULT_EVENT: begin
+                            // Write-only; event sequencer consumes the write.
+                        end
+                        REG_RX_EVENT, REG_REPLY_EVENT: begin
+                            // Write-only event registers.
                         end
                         default: begin
                         end
@@ -201,4 +228,47 @@ module radar_axi_pulse #(
         end
     end
 
+endmodule
+
+module radar_event_led #(
+    parameter integer PULSE_COUNT = 1,
+    parameter [25:0] PHASE_TICKS = 26'd10000000
+) (
+    input wire clk,
+    input wire rst_n,
+    input wire event_pulse,
+    output reg led
+);
+    reg active;
+    reg [25:0] phase_count;
+    reg [7:0] phase;
+
+    always @(posedge clk) begin
+        if (!rst_n) begin
+            active <= 1'b0;
+            phase_count <= 26'b0;
+            phase <= 8'b0;
+            led <= 1'b0;
+        end else if (!active) begin
+            led <= 1'b0;
+            if (event_pulse) begin
+                active <= 1'b1;
+                phase_count <= 26'b0;
+                phase <= 8'd1;
+                led <= 1'b1;
+            end
+        end else if (phase_count == PHASE_TICKS - 1'b1) begin
+            phase_count <= 26'b0;
+            if (phase == 2 * PULSE_COUNT) begin
+                active <= 1'b0;
+                phase <= 8'b0;
+                led <= 1'b0;
+            end else begin
+                phase <= phase + 1'b1;
+                led <= ~led;
+            end
+        end else begin
+            phase_count <= phase_count + 1'b1;
+        end
+    end
 endmodule

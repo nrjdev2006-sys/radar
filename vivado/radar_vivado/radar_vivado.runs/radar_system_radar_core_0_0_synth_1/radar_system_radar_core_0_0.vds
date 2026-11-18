@@ -1,0 +1,420 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Tue Nov  3 10:26:39 2026
+# Process ID         : 23160
+# Current directory  : C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_radar_core_0_0_synth_1
+# Command line       : vivado.exe -log radar_system_radar_core_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source radar_system_radar_core_0_0.tcl
+# Log file           : C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_radar_core_0_0_synth_1/radar_system_radar_core_0_0.vds
+# Journal file       : C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_radar_core_0_0_synth_1\vivado.jou
+# Running On         : DESKTOP-FKE42VV
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : 12th Gen Intel(R) Core(TM) i7-12700
+# CPU Frequency      : 2112 MHz
+# CPU Physical cores : 12
+# CPU Logical cores  : 20
+# Host memory        : 16853 MB
+# Swap memory        : 4115 MB
+# Total Virtual      : 20968 MB
+# Available Virtual  : 3495 MB
+#-----------------------------------------------------------
+source radar_system_radar_core_0_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 426.062 ; gain = 121.168
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Vivado/2024.2/data/ip'.
+Command: synth_design -top radar_system_radar_core_0_0 -part xc7z010clg400-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2824
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1114.395 ; gain = 467.480
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'radar_system_radar_core_0_0' [c:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.gen/sources_1/bd/radar_system/ip/radar_system_radar_core_0_0/synth/radar_system_radar_core_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'radar_core' [C:/Users/Dell/zynq-radar-sp/hdl/radar_core.v:30]
+INFO: [Synth 8-6157] synthesizing module 'axis_pulse_detect' [C:/Users/Dell/zynq-radar-sp/hdl/axis_pulse_detect.v:17]
+INFO: [Synth 8-6155] done synthesizing module 'axis_pulse_detect' (0#1) [C:/Users/Dell/zynq-radar-sp/hdl/axis_pulse_detect.v:17]
+INFO: [Synth 8-6157] synthesizing module 'axis_window' [C:/Users/Dell/zynq-radar-sp/hdl/axis_window.v:13]
+INFO: [Synth 8-6157] synthesizing module 'hann_rom' [C:/Users/Dell/zynq-radar-sp/hdl/hann_rom.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'hann_rom' (0#1) [C:/Users/Dell/zynq-radar-sp/hdl/hann_rom.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'axis_window' (0#1) [C:/Users/Dell/zynq-radar-sp/hdl/axis_window.v:13]
+INFO: [Synth 8-6157] synthesizing module 'fft_config_master' [C:/Users/Dell/zynq-radar-sp/hdl/fft_config_master.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'fft_config_master' (0#1) [C:/Users/Dell/zynq-radar-sp/hdl/fft_config_master.v:11]
+INFO: [Synth 8-6157] synthesizing module 'axis_peak_detect' [C:/Users/Dell/zynq-radar-sp/hdl/axis_peak_detect.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'axis_peak_detect' (0#1) [C:/Users/Dell/zynq-radar-sp/hdl/axis_peak_detect.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'radar_core' (0#1) [C:/Users/Dell/zynq-radar-sp/hdl/radar_core.v:30]
+INFO: [Synth 8-6155] done synthesizing module 'radar_system_radar_core_0_0' (0#1) [c:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.gen/sources_1/bd/radar_system/ip/radar_system_radar_core_0_0/synth/radar_system_radar_core_0_0.v:53]
+WARNING: [Synth 8-7129] Port fft_size[15] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[14] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[13] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[12] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[11] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[10] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[9] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[8] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[7] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[6] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[5] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[4] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[3] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[2] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[1] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[0] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_tlast in module axis_pulse_detect is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[31] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[30] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[29] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[28] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[27] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[26] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[25] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[24] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[23] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[22] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[21] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[20] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[19] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[18] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[17] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[16] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[15] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[14] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[13] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[12] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[11] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[10] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[9] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[8] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[1] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[0] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awprot[2] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awprot[1] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awprot[0] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[31] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[30] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[29] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[28] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[27] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[26] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[25] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[24] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[23] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[22] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[21] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[20] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[19] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[18] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[17] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[16] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[15] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[14] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[13] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[12] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[11] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[10] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[9] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[8] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[1] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_araddr[0] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_arprot[2] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_arprot[1] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_arprot[0] in module radar_core is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1232.406 ; gain = 585.492
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1232.406 ; gain = 585.492
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1232.406 ; gain = 585.492
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.023 . Memory (MB): peak = 1232.406 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1319.172 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.044 . Memory (MB): peak = 1319.184 ; gain = 0.012
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1319.184 ; gain = 672.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1319.184 ; gain = 672.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1319.184 ; gain = 672.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 1319.184 ; gain = 672.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 2     
+	   2 Input   16 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 13    
+	               16 Bit    Registers := 5     
+	                8 Bit    Registers := 1     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 23    
++---Muxes : 
+	   5 Input   32 Bit        Muxes := 3     
+	   2 Input   32 Bit        Muxes := 14    
+	   4 Input   32 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 4     
+	   5 Input   16 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 20    
+	   5 Input    1 Bit        Muxes := 3     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP i2, operation Mode is: A*B.
+DSP Report: operator i2 is absorbed into DSP i2.
+DSP Report: Generating DSP mag2, operation Mode is: PCIN+A*B.
+DSP Report: operator mag2 is absorbed into DSP mag2.
+DSP Report: operator q2 is absorbed into DSP mag2.
+DSP Report: Generating DSP i_w, operation Mode is: A*B.
+DSP Report: operator i_w is absorbed into DSP i_w.
+DSP Report: Generating DSP q_w, operation Mode is: A*B.
+DSP Report: operator q_w is absorbed into DSP q_w.
+DSP Report: Generating DSP re2_pipe_reg, operation Mode is: (A*B)'.
+DSP Report: register re2_pipe_reg is absorbed into DSP re2_pipe_reg.
+DSP Report: operator re2 is absorbed into DSP re2_pipe_reg.
+DSP Report: Generating DSP mag2_pipe, operation Mode is: PCIN+(A*B)'.
+DSP Report: register im2_pipe_reg is absorbed into DSP mag2_pipe.
+DSP Report: operator mag2_pipe is absorbed into DSP mag2_pipe.
+DSP Report: operator im2 is absorbed into DSP mag2_pipe.
+WARNING: [Synth 8-7129] Port fft_size[15] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[14] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[13] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[12] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[11] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[10] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[9] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[8] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[7] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[6] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[5] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[4] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[3] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[2] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[1] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port fft_size[0] in module axis_window is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_tlast in module axis_pulse_detect is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[31] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[30] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[29] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[28] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[27] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[26] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[25] in module radar_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_awaddr[24] in module radar_core is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1319.184 ; gain = 672.270
+---------------------------------------------------------------------------------
+ Sort Area is  re2_pipe_reg_6 : 0 0 : 1969 4033 : Used 1 time 0
+ Sort Area is  re2_pipe_reg_6 : 0 1 : 2064 4033 : Used 1 time 0
+ Sort Area is  i2_0 : 0 0 : 1937 3969 : Used 1 time 0
+ Sort Area is  i2_0 : 0 1 : 2032 3969 : Used 1 time 0
+ Sort Area is  i_w_5 : 0 0 : 2034 2034 : Used 1 time 0
+ Sort Area is  q_w_3 : 0 0 : 2034 2034 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++------------+------------+---------------+----------------+
+|Module Name | RTL Object | Depth x Width | Implemented As | 
++------------+------------+---------------+----------------+
+|hann_rom    | mem        | 1024x16       | LUT            | 
++------------+------------+---------------+----------------+
+
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name       | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|axis_pulse_detect | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|axis_pulse_detect | PCIN+A*B    | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|axis_window       | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|axis_window       | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|axis_peak_detect  | (A*B)'      | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|axis_peak_detect  | PCIN+(A*B)' | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 1    | 0    | 
++------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1468.707 ; gain = 821.793
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1469.523 ; gain = 822.609
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance n_count_reg_rep (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1498.160 ; gain = 851.246
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 1696.934 ; gain = 1050.020
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 1696.934 ; gain = 1050.020
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 1696.934 ; gain = 1050.020
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 1696.934 ; gain = 1050.020
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 1697.957 ; gain = 1051.043
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 1697.957 ; gain = 1051.043
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name       | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|axis_peak_detect  | (A*B)'      | 30     | 18     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|axis_peak_detect  | PCIN+(A*B)' | 30     | 18     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|axis_pulse_detect | A*B         | 30     | 18     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|axis_pulse_detect | PCIN+A*B    | 30     | 18     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|axis_window       | A*B         | 16     | 18     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|axis_window       | A*B         | 16     | 18     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |    61|
+|2     |DSP48E1  |     6|
+|5     |LUT1     |     7|
+|6     |LUT2     |    12|
+|7     |LUT3     |    56|
+|8     |LUT4     |   119|
+|9     |LUT5     |    16|
+|10    |LUT6     |   181|
+|11    |RAMB18E1 |     1|
+|12    |FDRE     |   584|
+|13    |FDSE     |    18|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 1697.957 ; gain = 1051.043
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 76 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:25 ; elapsed = 00:00:35 . Memory (MB): peak = 1697.957 ; gain = 964.266
+Synthesis Optimization Complete : Time (s): cpu = 00:00:35 ; elapsed = 00:00:38 . Memory (MB): peak = 1697.957 ; gain = 1051.043
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 1697.957 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 68 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1697.957 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 6ee4f4b5
+INFO: [Common 17-83] Releasing license: Synthesis
+34 Infos, 101 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:40 ; elapsed = 00:00:53 . Memory (MB): peak = 1697.957 ; gain = 1255.348
+INFO: [Coretcl 2-1174] Renamed 5 cell refs.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1697.957 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_radar_core_0_0_synth_1/radar_system_radar_core_0_0.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file radar_system_radar_core_0_0_utilization_synth.rpt -pb radar_system_radar_core_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  3 10:27:41 2026...

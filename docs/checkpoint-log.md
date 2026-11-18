@@ -192,14 +192,14 @@ PASS: observed 8 pulse starts; TX gate is on LED 0
 
 ## Checkpoint 15 — PS Ethernet IQ packet bring-up app
 
-**Implemented:** enabled `lwip220` in the Vitis standalone domain and added a GEM0/lwIP UDP listener to the PS app. The board uses static IP `192.168.1.10`, UDP port `5005`, and keeps the PL test pulse visible on LED 0. The app validates the version 1 `RDR1` header, payload length, and CRC. `HELLO` returns readiness; `STATUS` returns PL busy/TX/pulse count; `IQ_SAMPLES` validates int16 I/Q pairs and returns the count and peak component.
+**Implemented:** enabled `lwip220` in the Vitis standalone domain and added a GEM0/lwIP UDP listener to the PS app. The board uses static IP `192.168.1.10`, UDP port `5005`, and MAC `00-0a-35-7a-01-10`. The app validates the version 1 `RDR1` header, payload length, and CRC. `HELLO` returns readiness; `STATUS` returns PL busy/TX/pulse count; `IQ_SAMPLES` detects pulse regions in a TX-aligned IQ window and returns an echo sample, delay, and calculated range when an echo region is present. The PL LEDs show separate UDP arrival (LED2), calculated detection (LED1), reply queued (LED3), and TX gate (LED0) stages.
 
-**Host test utility:** `python -m radar_host.hardware_test --host 192.168.1.10` sends HELLO and a generated 256-sample complex tone IQ packet, then checks the board's response. For a direct PC cable, configure the wired PC adapter to `192.168.1.20/24`.
+**Host test utility:** `py -3.11 -m radar_host.hardware_test --host 192.168.1.10` sends HELLO and a generated 256-sample synthetic TX-reference/echo IQ window, then checks the board's range response. The wired PC adapter is `192.168.1.100/24`; board MAC is `00-0a-35-7a-01-10`.
 
-**Build verification:** Vitis 2024.2 successfully generated the lwIP platform and linked `radar_ps_app.elf`; output size reports 126,162 bytes text, 3,452 data, and 3,168,688 BSS. The host test utility starts and the existing host suite passes 23 tests.
+**Build verification:** the PS ELF was rebuilt and linked with the ARM GNU 13.3 toolchain. Vivado built the staged LED bitstream with 0 DRC errors. UART reports PHY autonegotiation at 1 Gbps and `UDP ready`.
 
-**Not yet verified:** this PC currently exposes Wi-Fi only, no wired Ethernet adapter, and JTAG hardware server was not listening during this build, so the new ELF has not been run or packet-tested on the board. Tomorrow, load the current matching bitstream and new ELF over JTAG, confirm the UART `UDP ready: 192.168.1.10:5005` banner, configure the wired PC IPv4 address, then run the Python test utility.
+**Verified on 2026-11-17:** a stale static ARP neighbor entry mapped the board IP to the wrong MAC (`00-0a-35-00-01-02`). Replacing it with the app MAC (`00-0a-35-7a-01-10`) fixed unicast routing. The Python hardware utility passed HELLO and IQ detection; the board returned 256 samples, echo sample 40, 2 us delay, and 299.792 m from the generated synthetic IQ. The PC adapter received 478 bytes in the successful run. UART confirmed the UDP callback, IQ detection, and lwIP reply submission. This completes an end-to-end digital test.
 
-**Scope limit:** the response proves that synthetic IQ bytes reach the Zynq PS and are parsed there. It reports only sample count/peak component; it does not pass IQ through the PL, capture an ADC, detect echoes, or calculate target range. Those are later data-path/DSP phases.
+**Scope limit:** `hardware_capture:false` is set in the reply. The current PL has no ADC/RF acquisition, so the PC-generated IQ validates board-side threshold detection and range arithmetic only. Physical target ranging still requires captured IQ aligned to the transmit trigger and the correct ADC sample-rate configuration.
 
 \n

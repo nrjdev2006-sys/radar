@@ -77,6 +77,12 @@ apply_bd_automation -rule xilinx.com:bd_rule:processing_system7 \
 create_bd_cell -type ip -vlnv user.org:user:radar_axi_pulse:1.0 radar_axi_pulse_0
 set tx_gate_port [create_bd_port -dir O tx_gate]
 connect_bd_net [get_bd_pins radar_axi_pulse_0/tx_gate] $tx_gate_port
+set result_led_port [create_bd_port -dir O result_led]
+connect_bd_net [get_bd_pins radar_axi_pulse_0/result_led] $result_led_port
+set rx_packet_led_port [create_bd_port -dir O rx_packet_led]
+connect_bd_net [get_bd_pins radar_axi_pulse_0/rx_packet_led] $rx_packet_led_port
+set reply_queued_led_port [create_bd_port -dir O reply_queued_led]
+connect_bd_net [get_bd_pins radar_axi_pulse_0/reply_queued_led] $reply_queued_led_port
 apply_bd_automation -rule xilinx.com:bd_rule:axi4 \
     -config [list Master "/processing_system7_0/M_AXI_GP0" Clk "Auto"] \
     [get_bd_intf_pins radar_axi_pulse_0/S_AXI]

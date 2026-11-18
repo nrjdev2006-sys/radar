@@ -1,0 +1,35 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Tue Nov  3 10:26:39 2026
+# Process ID         : 22936
+# Current directory  : C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_xfft_0_0_synth_1
+# Command line       : vivado.exe -log radar_system_xfft_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source radar_system_xfft_0_0.tcl
+# Log file           : C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_xfft_0_0_synth_1/radar_system_xfft_0_0.vds
+# Journal file       : C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_xfft_0_0_synth_1\vivado.jou
+# Running On         : DESKTOP-FKE42VV
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : 12th Gen Intel(R) Core(TM) i7-12700
+# CPU Frequency      : 2112 MHz
+# CPU Physical cores : 12
+# CPU Logical cores  : 20
+# Host memory        : 16853 MB
+# Swap memory        : 4115 MB
+# Total Virtual      : 20968 MB
+# Available Virtual  : 3526 MB
+#-----------------------------------------------------------
+source radar_system_xfft_0_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 426.148 ; gain = 124.633
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: radar_system_xfft_0_0
+INFO: [IP_Flow 19-6922] IPCACHE: Exporting cached entry 3353d15d4a3f4cf3 to dir: C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_xfft_0_0_synth_1
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file c:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.cache/ip/2024.2/3/3/3353d15d4a3f4cf3/radar_system_xfft_0_0.dcp to C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_xfft_0_0_synth_1/radar_system_xfft_0_0.dcp.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file c:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.cache/ip/2024.2/3/3/3353d15d4a3f4cf3/radar_system_xfft_0_0_sim_netlist.v to C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_xfft_0_0_synth_1/radar_system_xfft_0_0_sim_netlist.v.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file c:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.cache/ip/2024.2/3/3/3353d15d4a3f4cf3/radar_system_xfft_0_0_sim_netlist.vhdl to C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_xfft_0_0_synth_1/radar_system_xfft_0_0_sim_netlist.vhdl.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file c:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.cache/ip/2024.2/3/3/3353d15d4a3f4cf3/radar_system_xfft_0_0_stub.v to C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_xfft_0_0_synth_1/radar_system_xfft_0_0_stub.v.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file c:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.cache/ip/2024.2/3/3/3353d15d4a3f4cf3/radar_system_xfft_0_0_stub.vhdl to C:/Users/Dell/zynq-radar-sp/vivado/radar_vivado/radar_vivado.runs/radar_system_xfft_0_0_synth_1/radar_system_xfft_0_0_stub.vhdl.
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP radar_system_xfft_0_0, cache-ID = 3353d15d4a3f4cf3.
+config_ip_cache: Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 453.953 ; gain = 18.051
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  3 10:27:00 2026...
